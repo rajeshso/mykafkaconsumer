@@ -1,6 +1,6 @@
 package com.n2.kafkaconsumer;
 
-import com.n2.event.MyEvent;
+import com.n2.event.bar3.MyEvent;
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import javax.annotation.PostConstruct;
@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-// TODO: This implementation is not functional. Use the MyNewKafkaConsumer
+// TODO: This implementation is not functional. Use the ConsumerExample
 @Component
 public class MyKafkaConsumer {
 

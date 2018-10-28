@@ -1,20 +1,24 @@
 package com.n2.kafkaconsumer;
 
-import com.n2.event.MyEvent;
+
+import com.n2.event.bar3.MyEvent;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
-import io.confluent.kafka.serializers.KafkaAvroDeserializer;
-import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
-import java.util.Collections;
-import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-public class MyNewKafkaConsumer {
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Properties;
 
-  private static final String TOPIC = "bar1";
+public class ConsumerExample {
+
+  private static final String TOPIC = "bar3";
 
   @SuppressWarnings("InfiniteLoopStatement")
   public static void main(final String[] args) {
@@ -33,17 +37,14 @@ public class MyNewKafkaConsumer {
       consumer.subscribe(Collections.singletonList(TOPIC));
 
       while (true) {
-        try {
-          ConsumerRecords<String, MyEvent> records = consumer.poll(100);
-          for (ConsumerRecord<String, MyEvent> record : records) {
-            String key = record.key();
-            MyEvent value = record.value();
-            System.out.printf("key = %s, value = %s%n", key, value);
-          }
-        } catch (org.apache.kafka.common.errors.SerializationException e) {
-          e.printStackTrace();
+        ConsumerRecords<String, MyEvent> records = consumer.poll(100);
+        for (ConsumerRecord<String, MyEvent> record : records) {
+          String key = record.key();
+          MyEvent value = record.value();
+          System.out.printf("key = %s, value = %s%n", key, value);
         }
       }
+
     }
   }
 }
